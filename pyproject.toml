@@ -1,0 +1,16 @@
+[project]
+name = "cover-studio"
+version = "0.1.0"
+description = "Local browser-based book cover generator for authors and small publishers."
+requires-python = ">=3.11"
+dependencies = [
+  "Pillow",
+  "reportlab",
+]
+
+[project.scripts]
+cover-export = "generate_cover:main"
+cover-studio = "web_app:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

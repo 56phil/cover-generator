@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cover Studio</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <header class="brand">
+          <div>
+            <h1>Cover Studio</h1>
+            <p id="projectPath"></p>
+          </div>
+          <div id="statusBadge" class="badge">Loading</div>
+        </header>
+
+        <nav class="tabs" aria-label="Inspector sections">
+          <button class="tab active" data-panel="setup">Setup</button>
+          <button class="tab" data-panel="front">Front</button>
+          <button class="tab" data-panel="fonts">Fonts</button>
+          <button class="tab" data-panel="spine">Spine</button>
+          <button class="tab" data-panel="back">Back</button>
+          <button class="tab" data-panel="source">YAML</button>
+        </nav>
+
+        <section id="setup" class="panel active">
+          <div class="field-grid">
+            <label class="check"><input data-key="platform_preset" type="checkbox" /> KDP</label>
+            <label>Binding<select data-key="binding_type"></select></label>
+            <label class="preset-only">Trim<select data-key="trim_size"></select></label>
+            <label>Interior<select data-key="interior_type"></select></label>
+            <label>Paper<select data-key="paper_type"></select></label>
+            <label>Pages<input data-key="page_count" type="number" min="24" step="1" /></label>
+            <label>Direction<select data-key="reading_direction"></select></label>
+            <label>Units<select data-key="ui_units"></select></label>
+            <label>Guide X shift<input data-key="guide_x_offset_inches" type="number" step="0.01" /></label>
+          </div>
+          <div id="customSizePanel" class="custom-size">
+            <h2>Custom Size</h2>
+            <div class="field-grid">
+              <label>Width<input data-key="custom_trim_width_inches" type="number" step="0.01" /></label>
+              <label>Height<input data-key="custom_trim_height_inches" type="number" step="0.01" /></label>
+              <label>Spine<input data-key="custom_spine_width_inches" type="number" step="0.01" /></label>
+              <label>Bleed<input data-key="custom_bleed_inches" type="number" step="0.01" /></label>
+              <label>Safe margin<input data-key="custom_safe_margin_inches" type="number" step="0.01" /></label>
+            </div>
+          </div>
+          <div class="metrics" id="metrics"></div>
+        </section>
+
+        <section id="front" class="panel">
+          <label>Image<input data-key="front_cover_image" type="text" /></label>
+          <label>Title<input data-key="title" type="text" /></label>
+          <label>Subtitle<input data-key="subtitle" type="text" /></label>
+          <label>Author<input data-key="author_name" type="text" /></label>
+          <div class="field-grid">
+            <label class="check"><input data-key="BINDING_front_image_centered" type="checkbox" /> Center image</label>
+            <label>Image X<input data-key="BINDING_front_image_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Image Y<input data-key="BINDING_front_image_offset_y_inches" type="number" step="0.01" /></label>
+            <label class="check"><input data-key="BINDING_front_title_centered" type="checkbox" /> Center title</label>
+            <label>Title X<input data-key="BINDING_front_title_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Title Y<input data-key="BINDING_front_title_offset_y_inches" type="number" step="0.01" /></label>
+            <label class="check"><input data-key="BINDING_front_subtitle_centered" type="checkbox" /> Center subtitle</label>
+            <label>Subtitle X<input data-key="BINDING_front_subtitle_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Subtitle Y<input data-key="BINDING_front_subtitle_offset_y_inches" type="number" step="0.01" /></label>
+            <label class="check"><input data-key="BINDING_front_author_centered" type="checkbox" /> Center author</label>
+            <label>Author X<input data-key="BINDING_front_author_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Author Y<input data-key="BINDING_front_author_offset_y_inches" type="number" step="0.01" /></label>
+          </div>
+        </section>
+
+        <section id="fonts" class="panel">
+          <label>Title font<input data-key="font_title" type="text" /></label>
+          <label>Bold font<input data-key="font_bold" type="text" /></label>
+          <label>Body font<input data-key="font_regular" type="text" /></label>
+          <label>Italic font<input data-key="font_italic" type="text" /></label>
+          <div class="field-grid color-grid">
+            <label>Title color<input data-key="color_title" type="color" /></label>
+            <label>Accent color<input data-key="color_accent" type="color" /></label>
+            <label>Body color<input data-key="color_body" type="color" /></label>
+            <label>Soft text color<input data-key="color_soft" type="color" /></label>
+          </div>
+        </section>
+
+        <section id="spine" class="panel">
+          <div class="field-grid">
+            <label class="check"><input data-key="spine_text" type="checkbox" /> Spine text</label>
+            <label>Color<input data-key="spine_color" type="text" /></label>
+            <label>Text offset<input data-key="spine_text_offset_inches" type="number" step="0.01" /></label>
+            <label>Band extension<input data-key="spine_color_extension_inches" type="number" step="0.01" /></label>
+            <label>Title X<input data-key="BINDING_spine_title_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Title Y<input data-key="BINDING_spine_title_offset_y_inches" type="number" step="0.01" /></label>
+            <label>Author X<input data-key="BINDING_spine_author_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Author Y<input data-key="BINDING_spine_author_offset_y_inches" type="number" step="0.01" /></label>
+          </div>
+        </section>
+
+        <section id="back" class="panel">
+          <label>Quote<input data-key="quote" type="text" /></label>
+          <label>Quote attribution<input data-key="quote_attribution" type="text" /></label>
+          <label>Author photo<input data-key="author_photo" type="text" /></label>
+          <label>Blurb<textarea data-key="blurb"></textarea></label>
+          <label>Author bio<textarea data-key="author_bio"></textarea></label>
+          <div class="field-grid">
+            <label>Blurb X<input data-key="BINDING_back_blurb_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Blurb Y<input data-key="BINDING_back_blurb_offset_y_inches" type="number" step="0.01" /></label>
+            <label>Quote X<input data-key="BINDING_back_quote_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Quote Y<input data-key="BINDING_back_quote_offset_y_inches" type="number" step="0.01" /></label>
+            <label>Bio X<input data-key="BINDING_back_author_bio_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Bio Y<input data-key="BINDING_back_author_bio_offset_y_inches" type="number" step="0.01" /></label>
+            <label>Photo X<input data-key="BINDING_back_author_image_offset_x_inches" type="number" step="0.01" /></label>
+            <label>Photo Y<input data-key="BINDING_back_author_image_offset_y_inches" type="number" step="0.01" /></label>
+          </div>
+        </section>
+
+        <section id="source" class="panel">
+          <textarea id="yamlView" readonly></textarea>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="toolbar">
+          <div class="segmented">
+            <button id="fitButton" class="icon-button" title="Fit preview">Fit</button>
+            <label class="guide-toggle"><input id="guides" type="checkbox" /> Guides</label>
+          </div>
+          <div class="actions">
+            <button id="saveButton">Save</button>
+            <button id="previewButton">Preview</button>
+            <button id="exportButton" class="primary">Export</button>
+          </div>
+        </header>
+
+        <div class="preview-stage">
+          <img id="previewImage" alt="Cover preview" />
+        </div>
+
+        <footer class="issues" id="issues"></footer>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
