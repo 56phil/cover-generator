@@ -1,6 +1,6 @@
 # Cover Generator for Authors and Small Publishers
 
-Cover Studio is a local cover-making tool for authors and small publishers. It
+Cover Generator is a local cover-making tool for authors and small publishers. It
 can make covers for print-on-demand services, local printers, proof copies,
 booklets, and personal book projects.
 
